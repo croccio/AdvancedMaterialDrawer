@@ -45,14 +45,14 @@ import android.widget.TextView;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.madcyph3r.materialnavigationdrawer.listener.MaterialHeadItemChangeListener;
 import de.madcyph3r.materialnavigationdrawer.head.MaterialHeadItem;
+import de.madcyph3r.materialnavigationdrawer.listener.MaterialHeadItemChangeListener;
 import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionChangeListener;
+import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionOnClickListener;
 import de.madcyph3r.materialnavigationdrawer.menu.MaterialMenu;
 import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialDevisor;
 import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialLabel;
 import de.madcyph3r.materialnavigationdrawer.menu.item.MaterialSection;
-import de.madcyph3r.materialnavigationdrawer.listener.MaterialSectionOnClickListener;
 import de.madcyph3r.materialnavigationdrawer.tools.Utils;
 
 
@@ -1726,22 +1726,23 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
                     section.unSelect();
 
                     //finish();
-               /* if (finishActivityOnNewIntent) {
-                    this.startActivity(section.getTargetIntent());
-                    finish();
-                } else {*/
+                    if (finishActivityOnNewIntent) {
+                        this.startActivity(section.getTargetIntent());
+                        finish();
+                    } else {
 
-                    // smooth close drawerViewGroup before activity start
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            startActivity(section.getTargetIntent());
-                            if (finishActivityOnNewIntent)
-                                finish();
-                        }
-                    }, 200);
+                        // smooth close drawerViewGroup before activity start
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                startActivity(section.getTargetIntent());
+                                if (finishActivityOnNewIntent)
+                                    finish();
+                            }
+                        }, 200);
 
-                    closeDrawer();
+                        closeDrawer();
+                    }
                 }
             }
         }
@@ -1927,13 +1928,13 @@ public abstract class MaterialNavigationDrawer<Fragment> extends ActionBarActivi
 
     }
 
-    public void setActionBarOverlay(boolean overlay){
+    public void setActionBarOverlay(boolean overlay) {
         actionBarOverlay = overlay;
         if (actionBarOverlay) overlayView.setVisibility(View.GONE);
         else overlayView.setVisibility(View.VISIBLE);
     }
 
-    public boolean isActionBarOverlay(){
+    public boolean isActionBarOverlay() {
         return actionBarOverlay;
     }
 
